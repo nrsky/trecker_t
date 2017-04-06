@@ -1,0 +1,28 @@
+LOG:  database system was shut down at 2017-04-06 19:57:24 BST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  autovacuum launcher started
+LOG:  database system is ready to accept connections
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+ERROR:  permission denied to create extension "postgis"
+HINT:  Must be superuser to create this extension.
+STATEMENT:  CREATE EXTENSION postgis;
+ERROR:  must be superuser to alter superusers
+STATEMENT:  ALTER USER postgres with superuser;
+FATAL:  role "root" does not exist
+ERROR:  extension "postgis" already exists
+STATEMENT:  CREATE EXTENSION postgis;
+	-- Enable Topology
+	CREATE EXTENSION postgis_topology;
+	-- Enable PostGIS Advanced 3D 
+	-- and other geoprocessing algorithms
+	-- sfcgal not available with all distributions
+	CREATE EXTENSION postgis_sfcgal;
+	-- fuzzy matching needed for Tiger
+	CREATE EXTENSION fuzzystrmatch;
+	-- rule based standardizer
+	CREATE EXTENSION address_standardizer;
+	-- example rule data set
+	CREATE EXTENSION address_standardizer_data_us;
+	-- Enable US Tiger Geocoder
+	CREATE EXTENSION postgis_tiger_geocoder;
