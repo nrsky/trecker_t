@@ -17,10 +17,7 @@ class DriverInformationController < ActionController::Base
   def load_data
     if (params[:file]) && (params[:file].size < FILE_SIZE)
       file  = params[:file]
-      @parsed_data = NotamParseService.new.process_notam file
-      respond_to do |format|
-        format.html { render :partial => "notam/show_table.html" }
-      end
+      @parsed_data = ParserService.new.process file
     else
       raise "#{params} Params are empty or size is too big"
     end

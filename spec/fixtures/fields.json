@@ -1,0 +1,14 @@
+{
+  "fields": [
+    {"name":"Arnis", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [1,2,3]},
+    {"name":"Bad Sulza", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [1,3,4]},
+    {"name":"Bonn", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [1,2]},
+    {"name":"Esens", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [2,3]},
+    {"name":"Gronau (Leine)", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [3,4]},
+    {"name":"Hornberg", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [1,4]},
+    {"name":"Leuna", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [3]},
+    {"name":"Mindelheim", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [2,4]},
+    {"name":"Ostritz", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [3,4]},
+    {"name":"Rostock", "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53", "company_ids": [1,2,3,4]}
+  ]
+}

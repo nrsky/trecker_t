@@ -15,10 +15,5 @@ class InitializeTables < ActiveRecord::Migration[5.0]
       t.string :name
       t.timestamps
     end
-
-    create_table :companies_fields, id: false do |t|
-      t.belongs_to :company, index: true
-      t.belongs_to :field, index: true
-    end
   end
 end

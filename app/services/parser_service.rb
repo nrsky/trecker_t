@@ -1,14 +1,15 @@
 class ParserService
 
   def upload_fields_from(file)
-    file.read.each_line do |line|
-      clean_string(line)
+    parsed_data = JSON.parse(file)
+    parsed_data['fields'].each do |field_item|
+      field = Field.find_or_initialize_by(name: field_item['name'])
+      field.shape = "POLYGON ((#{field_item['polygon']}))"
+      field.save!
     end
   end
 
   private
 
-  def clean_string(str)
-    str.tr("\n", ' ').tr('.', ' ').tr(',',' ')
-  end
+
 end

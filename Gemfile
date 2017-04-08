@@ -25,8 +25,7 @@ gem 'jbuilder', '~> 2.5'
 #DB
 gem 'pg'
 #postgis - geometry support
-gem 'activerecord-postgis-adapter'
-
+gem 'activerecord-postgis-adapter', '~> 4.0'
 
 #elasticsearch
 gem 'chewy'
