@@ -7,4 +7,6 @@
 
 class Company < ApplicationRecord
   has_many :drivers
+
+  validates :name, presence: true
 end

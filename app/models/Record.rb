@@ -3,7 +3,7 @@
 # Table name: collections
 #
 #  id             :integer   not null, primary key
-#  driver_id
+#  driver_id      :integer   not null
 #  timestamp
 #  latitude
 #  longitude

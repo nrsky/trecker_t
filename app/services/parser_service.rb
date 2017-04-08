@@ -8,8 +8,4 @@ class ParserService
       field.save!
     end
   end
-
-  private
-
-
 end

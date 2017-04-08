@@ -9,4 +9,6 @@
 class Driver < ApplicationRecord
   #Assumption that driver can work only for one company
   belongs_to :company
+
+  validates :name, presence: true
 end

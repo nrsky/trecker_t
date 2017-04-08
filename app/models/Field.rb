@@ -4,7 +4,7 @@
 #
 #  id                        :integer          not null, primary key
 #  name                      :string(255)      not null
-#  shape                     :polygon          geocode
+#  shape                     :polygon          not null
 
 class Field < ApplicationRecord
   validates :name, presence: true
