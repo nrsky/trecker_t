@@ -24,10 +24,21 @@ gem 'jbuilder', '~> 2.5'
 
 #DB
 gem 'pg'
+#postgis - geometry support
+gem 'activerecord-postgis-adapter'
+
+
+#elasticsearch
+gem 'chewy'
+gem 'acts-as-taggable-on'
+gem 'elasticsearch'
+gem 'elasticsearch-extensions'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-expectations'
 end
 
 group :development do

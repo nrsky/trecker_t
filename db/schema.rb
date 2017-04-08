@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406220354) do
+ActiveRecord::Schema.define(version: 20170406230005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,11 +129,8 @@ ActiveRecord::Schema.define(version: 20170406220354) do
     t.index ["tlid", "statefp"], name: "idx_tiger_featnames_tlid_statefp", using: :btree
   end
 
-  create_table "fields", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Could not dump table "fields" because of following StandardError
+#   Unknown type 'geometry' for column 'shape'
 
   create_table "geocode_settings", primary_key: "name", id: :text, force: :cascade do |t|
     t.text "setting"
@@ -184,9 +181,6 @@ ActiveRecord::Schema.define(version: 20170406220354) do
     t.text "staging_schema"
   end
 
-# Could not dump table "mytable" because of following StandardError
-#   Unknown type 'geometry(Point,26910)' for column 'geom'
-
   create_table "pagc_gaz", force: :cascade do |t|
     t.integer "seq"
     t.text    "word"
@@ -220,16 +214,21 @@ ActiveRecord::Schema.define(version: 20170406220354) do
     t.index ["state"], name: "place_lookup_state_idx", using: :btree
   end
 
+  create_table "records", force: :cascade do |t|
+    t.datetime "date_sent"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "accuracy"
+    t.string   "speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "driver_id"
+    t.index ["driver_id"], name: "index_records_on_driver_id", using: :btree
+  end
+
   create_table "secondary_unit_lookup", primary_key: "name", id: :string, limit: 20, force: :cascade do |t|
     t.string "abbrev", limit: 5
     t.index ["abbrev"], name: "secondary_unit_lookup_abbrev_idx", using: :btree
-  end
-
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, force: :cascade do |t|
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
   end
 
 # Could not dump table "state" because of following StandardError

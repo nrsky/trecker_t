@@ -10,6 +10,6 @@
 #  accuracy
 #  speed
 
-#TODO to think to move to ElasticSearch
-class DriverRecord < ApplicationRecord
+class Record < ApplicationRecord
+  belongs_to :driver
 end
