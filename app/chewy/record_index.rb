@@ -1,4 +1,4 @@
-class RecordsIndex  < Chewy::Index
+class RecordIndex  < Chewy::Index
   define_type ::Record do
     field :timestamp
     field :driver_id

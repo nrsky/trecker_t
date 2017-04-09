@@ -14,6 +14,8 @@
 #  updated_at     :timestamp
 
 class Record < ApplicationRecord
+  update_index('record#record') { self }
+
   belongs_to :driver
 
   validates :driver_id, presence: true
