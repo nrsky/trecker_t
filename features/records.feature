@@ -1,4 +1,3 @@
-@elastic-search
 Feature: CreateRecord
   Background:
     Given a driver with id 1
@@ -17,6 +16,7 @@ Feature: CreateRecord
       }
    """
     Then I should get a "201" response
+    And ElasticSearch index "record" created
 
 
   Scenario: Creating a record with incorrect driver_id

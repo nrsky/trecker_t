@@ -9,7 +9,7 @@ describe ParserService do
 
   context 'upload fields' do
     it 'should load all records from file to DB' do
-      expect { ParserService.new.upload_fields_from(file) }.to change { Field.count }.from(0).to(5)
+      expect { ParserService.new.upload_fields_from(file) }.to change { Field.count }.from(0).to(3)
     end
   end
 end
