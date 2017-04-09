@@ -8,7 +8,7 @@ development:
   <<: *default
   database: trecker_t_development
 
-test:
+test: &test
   <<: *default
   database: trecker_t_test
 
@@ -18,3 +18,6 @@ production:
   username: trecker
   password: password
 
+
+cucumber:
+  <<: *test
