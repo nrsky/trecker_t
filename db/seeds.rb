@@ -1,6 +1,7 @@
 #Seeds for development environment
 if Rails.env.development?
   # development specific seeding code
+
   if Company.all.empty?
     20.times do
       Company.create(name: Faker::Company.name)
@@ -12,6 +13,11 @@ if Rails.env.development?
       Driver.create(name: Faker::Name.name, company_id: company_ids[rand(0..company_ids.count)])
     end
   end
+
+  #TODO delete from migrations. This block is for compare how fast is it to push 100K data to Postgres and to ElasticSearch
+  # For me at mac i7 it took 15 minutes to insert this data to postgres DB
+  # it takes about 10 seconds to update indexes for the same amount.
+
   if Record.all.empty?
     Chewy.strategy(:atomic)
     driver_ids = Driver.all.map(&:id)
@@ -39,7 +45,7 @@ if Rails.env.development?
 
   if Field.all.empty?
     file_path = File.join(Rails.root, 'spec', 'fixtures', 'fields.json')
-    ParserService.new.upload_fields_from(File.read(file_path))
+    FileParserService.new.upload_fields_from(File.read(file_path))
   end
 end
 

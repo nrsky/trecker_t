@@ -13,6 +13,9 @@
 #  created_at     :timestamp
 #  updated_at     :timestamp
 
+#TODO move update_index to action without saving model to Postgres Database.
+#Persistence to PG was added for benchmarks and compare
+#Add chewy:reset to update data
 class Record < ApplicationRecord
   update_index('record#record') { self }
 

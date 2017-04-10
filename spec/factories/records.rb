@@ -16,11 +16,11 @@
 
 FactoryGirl.define do
   factory :record do
-    driver { create :driver }
     timestamp { Time.now }
     latitude { 52.234234 }
     longitude { 13.23324 }
     accuracy { 12.0 }
     speed { 123.45 }
+    association :driver, factory: :driver
   end
 end

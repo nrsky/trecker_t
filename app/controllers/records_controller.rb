@@ -1,5 +1,7 @@
 class RecordsController < ActionController::Base
 
+  #TODO after playing with PG, we should save just index without entity,
+  #but I'd like to keep this code to show cucumber features, routes, params, etc
   def create
     begin
       driver = Driver.find(params[:driver_id])
