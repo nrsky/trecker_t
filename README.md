@@ -10,14 +10,15 @@ Linux - https://www.postgresql.org/download/linux/
 install postgis (geolocation) 
 brew install postgis
 
+2) install elasticsearch (any version ander 2.4 because of chewy compatibility), run port 9200 
 
-2) Run Postgres Server
+3) Run Postgres Server
 initdb /usr/local/var/postgres - if you didn't have postgres installed before 
 pg_ctl -D /usr/local/var/postgres -l logfile start
 
 
 #create database
-rake db:create 
+rake db:create  from project directory
 
 Enabling PostGIS
 
@@ -25,6 +26,8 @@ PostGIS is an optional extension that must be enabled in each database you want 
 
 Connect to your database with psql or PgAdmin. Run the following SQL. You need only install the features you want:
 execute in PG console
+
+#TODO I had to move this to migrations
 
 -- Enable PostGIS (includes raster)
 CREATE EXTENSION postgis;
@@ -43,6 +46,22 @@ CREATE EXTENSION address_standardizer_data_us;
 -- Enable US Tiger Geocoder
 CREATE EXTENSION postgis_tiger_geocoder;
 
-#run migrations
+4) bundle install
+
+5) #run migrations
 
 rake db:migrate
+
+6) #seed DB, can take up to few min, depending on hardware
+rake db:seed
+
+7) # Indexes updates
+rake chewy:reset       there should be 10K docs under /record/_stats/docs
+
+8) bundle exec rspec   - for tests
+
+9) bundle exec cucumber  - for features
+
+10) rails s Puma       #start the service
+  
+11) http://localhost:3000/processed_time_by_activities?driver_id=1&day=10/04/2017  #provide any existing driver_id - should be seeded in DB

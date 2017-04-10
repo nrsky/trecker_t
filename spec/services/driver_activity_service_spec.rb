@@ -19,7 +19,7 @@ describe DriverActivityService do
       end
       RecordIndex.reset!
       expect(RecordIndex::Record.query(term: {driver_id: driver.id}).total_count).to eq(10)
-      hash = subject.activities_for(driver.id, 1.day.ago, Time.now)
+      hash = subject.activities_for(driver.id, Date.today)
       expect(hash[:driving_time]).to be_truthy
       expect(hash[:cultivating_time]).to be_truthy
       expect(hash[:reparing_time]).to be_truthy

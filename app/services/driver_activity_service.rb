@@ -5,7 +5,7 @@ class DriverActivityService
   # Cultivating - The driver is working on a field. This means that the speed is more than 1 km/h and the location is part of predefined fields (geofenced)
   # Repairing - The driver is repairing a machine on a field. This means that the speed is less than 1 km/h and the location is part of predefined fields (geofenced)
 
-  def activities_for(driver_id, time_from, time_to)
+  def activities_for(driver_id, day)
     fields = Field.all.map(&:shape)
     return if fields.empty?
 
@@ -22,7 +22,7 @@ class DriverActivityService
 
     scope.each do |record|
       time = get_time(record.timestamp, current_record.timestamp)
-      speed = get_distance(record.location, current_record.location)/time
+      speed = get_distance(record.location, current_record.location)/(time*3600)
       work_on_predefined_fields = part_of_fields?(geo_factory, fields, record.location['lon'], record.location['lat'])
       update_processing_time!(processing_time, speed, time, work_on_predefined_fields)
 

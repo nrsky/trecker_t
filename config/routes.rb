@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
+  #NOTE create record and see index creating in ElasticSearch, should be changed,see Record model
   resources :records, only: [:create]
+
+  #TODO resources drivers, companies, fields, only: [:create, :update, :delete]
+  get :processed_time_by_activities, controller:"application"
 end
 
 

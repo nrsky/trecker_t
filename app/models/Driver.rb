@@ -11,4 +11,6 @@ class Driver < ApplicationRecord
   belongs_to :company
 
   validates :name, presence: true
+  #Research chewy delete index cascade based on active record
+  #TODO add delete driver should delete  RecordIndexes of this driver
 end
