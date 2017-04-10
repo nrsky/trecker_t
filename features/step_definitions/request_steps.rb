@@ -3,6 +3,10 @@ When(/^I make "(.*?)" request to "(.*?)":$/) do |method, url, raw_data|
   self.send(method.downcase, eval('"' + url + '"'), params.to_json, {'CONTENT_TYPE' => 'application/json'})
 end
 
+When(/^I make a "(.*?)" request to "([^"]*?)"$/) do |method, url|
+  send_request method, url
+end
+
 Then(/^I should get a "(.*?)" response$/) do |code|
   expect(last_response.status).to eq(code.to_i)
 end
@@ -14,3 +18,8 @@ end
 Then(/^the JSON errors should be:$/) do |table|
   json_error_response_should_be(table.raw.flatten)
 end
+
+def send_request(request_type, path, params={})
+  request path, method: request_type.downcase.to_sym, params: params
+end
+
