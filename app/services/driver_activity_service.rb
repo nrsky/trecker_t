@@ -7,6 +7,8 @@ class DriverActivityService
 
   def activities_for(driver_id, time_from, time_to)
     fields = Field.all.map(&:shape)
+    return if fields.empty?
+
     processing_time =  {driving_time: 0, cultivating_time: 0, reparing_time: 0}
 
     #TODO move to configs
