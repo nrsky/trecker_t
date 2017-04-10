@@ -7,8 +7,8 @@ describe DriverActivityService do
 
   subject {DriverActivityService.new}
 
-  #TODO move to features for controller
   context '#activities_for' do
+    #TODO move to features for controller
     it 'should calculate type of activity and processing time' do
       10.times do
         FactoryGirl.create(:record,
