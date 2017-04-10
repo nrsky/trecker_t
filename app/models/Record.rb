@@ -16,6 +16,8 @@
 #TODO move update_index to action without saving model to Postgres Database.
 #Persistence to PG was added for benchmarks and compare
 #Add chewy:reset to update data
+
+#accuracy field can be used to determine whether data precise or not and skip models with very low accuracy
 class Record < ApplicationRecord
   update_index('record#record') { self }
 

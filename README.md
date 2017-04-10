@@ -68,4 +68,8 @@ rake chewy:reset       there should be 10K docs under /record/_stats/docs
 10) rails s Puma       #start the service
   
 11) http://localhost:3000/processed_time_by_activities?driver_id=1&day=10/04/2017  #provide any existing driver_id - should be seeded in DB
+
+12) Assumptions 
+  - I assume in the app that driver doesn't work if information is not provided for 30 sec. 
  
+A design proposal for scaling should be provided in case the number of the provided locations is more than 100K/minute and the fields are more than 100 millions
