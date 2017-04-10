@@ -1,12 +1,13 @@
 class DriverActivityService
-
-  NO_DATA_PROVIDED_TIME = 100000
+  
+  NO_DATA_PROVIDED_TIME = 30
 
   # We would like you to create a scalable and distributed algorithm in order to classify the drivers actions into the following 3 activities:
   # Driving - The driver is driving on the road. This means that the speed is more than 5 km/h and the location is not part of predefined fields (geofenced)
   # Cultivating - The driver is working on a field. This means that the speed is more than 1 km/h and the location is part of predefined fields (geofenced)
   # Repairing - The driver is repairing a machine on a field. This means that the speed is less than 1 km/h and the location is part of predefined fields (geofenced)
 
+  #TODO refactoring clean it up
   def activities_for(driver_id, day)
     fields = Field.all.map(&:shape)
     return if fields.empty?
