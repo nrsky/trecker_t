@@ -1,6 +1,6 @@
 class FieldsController < ActionController::Base
 
- #TODO create/update/delete field
+ #TODO /update/delete field
   def create
     begin
       field = Field.new(field_params)
