@@ -24,7 +24,7 @@ class DriverActivityService
     geo_factory = RGeo::Geographic.spherical_factory
 
     #TODO Research chewy add filter gte then day start time and lte then day end time
-    scope = RecordIndex::Record.query(term: {driver_id: driver_id}).order(timestamp: :desc)
+    scope = RecordIndex::Record.query(term: {driver_id: driver_id}).sort_by(&:timestamp)
 
     #NOTE next implementation for Chewy query
     current_record = scope.first
