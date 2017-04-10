@@ -22,7 +22,7 @@ PLEASE READ! aboute implementation, what I've done and what not due to time rest
      Wanted to upload data in 3 ways: 1) from file, 2) from webservice 3) seed to see big data like 100K entities
      3) fully implemented
      1) created just fields parser service, didn't implement records parser and controllers
-     2) create "create record" controller endpoint, didn't implement for fields and didn't write microservice or web app. So POST client can be used for creation
+     2) created controller endpoints(fields and records resources), didn't write microservice or web app. So POST client can be used to add data
      
      !Important  if you need any of these steps to be fully implemented - please tell me, that's not a problem (just some time)
      
