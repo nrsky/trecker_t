@@ -7,7 +7,7 @@ class RecordsController < ActionController::Base
   def upload
     begin
       file =  params[:file]
-      total_count  = FileParserService.new.upload_fields_from(file)
+      total_count  = JsonParser.new.upload_fields_from(file)
       render json: { total_count:  total_count}, status: 200
     rescue Exception => e
       render json: { :errors => [e.message] }, status: 422

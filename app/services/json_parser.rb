@@ -1,4 +1,4 @@
-class FileParserService
+class JsonParser
 
   def upload_fields_from(file)
     parsed_data = JSON.parse(file.read)

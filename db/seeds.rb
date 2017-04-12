@@ -46,7 +46,7 @@ if Rails.env.development?
 
   if Field.all.empty?
     file_path = File.join(Rails.root, 'spec', 'fixtures', 'fields.json')
-    FileParserService.new.upload_fields_from(File.read(file_path))
+    JsonParser.new.upload_fields_from(File.read(file_path))
   end
 end
 
