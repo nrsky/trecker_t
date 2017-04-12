@@ -34,6 +34,10 @@ gem 'elasticsearch'
 gem 'elasticsearch-extensions'
 
 gem 'geocoder'
+gem 'carrierwave'
+
+gem  'bootstrap-sass'
+
 
 group :test do
   gem 'cucumber-rails', :require => false

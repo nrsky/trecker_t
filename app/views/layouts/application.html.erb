@@ -6,9 +6,16 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <%= csrf_meta_tags %>
 
+  </head>
   <body>
+  <div class = "container" style = "padding-top:20px;">
     <%= yield %>
+  </div>
   </body>
+
 </html>
+<!DOCTYPE html>
+<html>
+
