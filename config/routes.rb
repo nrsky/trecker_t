@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :fields, only: [:create]
-  resources :drivers, only: [:create]
+  resources :drivers, only: [:create, :index, :show]
   resources :companies, only: [:create]
 end
 

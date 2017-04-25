@@ -1,19 +1,22 @@
 class DriversController < ActionController::Base
 
- #TODO update/delete driver
- #when delete - delete cascade RecordIndexes of this driver
   def create
     begin
-      driver = Driver.create!(driver_params)
-      render json: driver, status: :created
+      driver = Driver.create(driver_params)
+      render json: driver.to_json, status: :created
     rescue Exception => e
       render json: { :errors => [e.message] }, status: 422
     end
   end
 
+  def index
+    drivers = Driver.all
+    render :json => {total_count: drivers.count, drivers: drivers.to_json}
+  end
+
   private
 
   def driver_params
-    params.require(:driver).permit(:name)
+    params.permit(:name, :company_id)
   end
 end

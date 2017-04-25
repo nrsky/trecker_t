@@ -1,5 +1,3 @@
-#For integration with elastic-search gem 'chewy'
-require 'chewy/rspec'
 
 RSpec.configure do |config|
 

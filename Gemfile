@@ -28,10 +28,10 @@ gem 'pg'
 gem 'activerecord-postgis-adapter', '~> 4.0'
 
 #elasticsearch
-gem 'chewy'
-gem 'acts-as-taggable-on'
-gem 'elasticsearch'
-gem 'elasticsearch-extensions'
+gem 'elasticsearch-rails', git: 'git://github.com/elastic/elasticsearch-rails.git'
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+
+gem "elasticsearch-persistence", require: 'elasticsearch/persistence/model'
 
 gem 'geocoder'
 gem 'carrierwave'

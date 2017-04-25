@@ -14,7 +14,7 @@ RSpec.describe Field do
     it 'should raise validation exception when create with nil values' do
       expect{
         subject.create!(name: 'name')
-      }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Shape can't be blank")
+      }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Shape cannot be empty or the data is not a polygon")
 
       expect{
         subject.create!(shape: "POLYGON ((75.15 29.53,77 29,77.6 29.5,75.15 29.53))")

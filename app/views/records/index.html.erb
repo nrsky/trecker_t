@@ -8,7 +8,44 @@
 
     Upload data from file:
 
-  <%= form_tag({:action => 'upload'}, multipart: true) do %>
+    <div>(You can upload fields or driver records within json format). Example of file format
+      {"fields": [{"name":"Arnis",  "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53"}]} for fields</div>
+
+    <div>For records
+    {
+    "records": [
+    {
+    "company_id":123,
+    "driver_id":456,
+    "timestamp":"2017-04-10'T'22:46:00",
+    "latitude":52.234234,
+    "longitude":13.23324,
+    "accuracy":12.0,
+    "speed":123.45
+    },
+    {
+    "company_id":123,
+    "driver_id":456,
+    "timestamp":"2017-04-10'T'22:46:03",
+    "latitude":52.234236,
+    "longitude":13.23327,
+    "accuracy":12.0,
+    "speed":123.45
+    },
+    {
+    "company_id":123,
+    "driver_id":456,
+    "timestamp":"2017-04-10'T'22:46:06",
+    "latitude":52.234236,
+    "longitude":13.23328,
+    "accuracy":13.0,
+    "speed":123.45
+    }
+    ]
+    }
+    </div>
+
+    <%= form_tag({:action => 'upload'}, multipart: true) do %>
       <div class="field">
         <%= label_tag :file %>
         <%= file_field_tag :file %>
@@ -18,3 +55,59 @@
       </div>
   <% end %>
   </div>
+
+</br>
+
+<div>
+  Create an organization
+  <%= form_tag({:action => 'create', :controller => 'companies'}) do %>
+      <div class="field">
+        <%=text_field_tag 'name'%>
+      </div>
+      <div class="actions">
+        <%= submit_tag 'Create'%>
+      </div>
+  <% end %>
+</div>
+
+
+ <div>
+   Create a driver
+   <%= form_tag({:action => 'create', :controller => 'drivers'}) do %>
+       <div class="field">
+         <%=text_field_tag 'name'%>
+         <%=select_tag 'company_id', options_for_select(@companies.collect{ |c| [c.name, c.id] })%>
+       </div>
+       <div class="actions">
+         <%= submit_tag 'Create'%>
+       </div>
+   <% end %>
+ </div>
+
+
+<div>
+  Create a field
+  <%= form_tag({:action => 'create', :controller => 'fields'}) do %>
+      <br class="field">
+        <span>Name: </span><%=text_field_tag 'name'%></br>
+        <span>Polygon shape</span><%=text_field_tag 'shape'%>
+      </div>
+      <div class="actions">
+        <%= submit_tag 'Create'%>
+      </div>
+  <% end %>
+</div>
+
+<div>
+
+  Create a record for the driver. Please put the json for the record here
+  <%= form_tag({:action => 'create', :controller => 'records'}) do %>
+      <div class="field">
+        <%=text_area_tag 'json_text'%>
+      </div>
+      <div class="actions">
+        <%= submit_tag 'Create'%>
+      </div>
+  <% end %>
+</div>
+

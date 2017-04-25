@@ -15,6 +15,6 @@ class FieldsController < ActionController::Base
   private
 
   def field_params
-    params.require(:field).permit(:name, :shape)
+    params.permit(:name, :shape)
   end
 end

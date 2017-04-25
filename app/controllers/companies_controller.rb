@@ -1,6 +1,5 @@
 class CompaniesController < ActionController::Base
 
- #TODO update/delete company
  #when delete - delete cascade RecordIndexes of this company
   def create
     begin
@@ -14,6 +13,6 @@ class CompaniesController < ActionController::Base
   private
 
   def company_params
-    params.require(:company).permit(:name)
+    params.permit(:name)
   end
 end

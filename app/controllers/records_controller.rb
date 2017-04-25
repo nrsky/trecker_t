@@ -1,6 +1,8 @@
 class RecordsController < ActionController::Base
 
   def index
+    #TODO move to another controller
+    @companies = Company.all
     render :index
   end
 
@@ -19,13 +21,19 @@ class RecordsController < ActionController::Base
   #but I'd like to keep this code to show cucumber features, routes, params, etc
   def create
     begin
-      driver = Driver.find(params[:driver_id])
-      record = Record.new(record_params)
-      record.driver = driver
+      if params[:json_text].present?
+        logger.error(params[:json_text])
+        params.merge!(JSON.parse(params[:json_text]))
+      end
+
+      record = Record.create(record_params)
       record.timestamp = timestamp
-      #We can assign company id as well, but I think it is redandant in this logic
-      record.save!
-      render json: record, status: :created
+      if record.valid?
+        record.save
+        render json: record, status: :created
+      else
+        raise Exception.new(record.errors.first)
+      end
     rescue Exception => e
       render json: { :errors => [e.message] }, status: 422
     end
@@ -44,7 +52,7 @@ class RecordsController < ActionController::Base
   private
 
   def record_params
-    params.require(:record).permit(:company_id, :driver_id, :timestamp, :latitude, :longitude, :accuracy, :speed)
+    params.permit(:company_id, :driver_id, :timestamp, :latitude, :longitude, :accuracy, :speed)
   end
 
   def timestamp
