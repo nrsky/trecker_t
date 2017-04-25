@@ -15,6 +15,7 @@ class Record
   include Elasticsearch::Persistence::Model
   include Elasticsearch::Model::Callbacks
 
+
   attr_accessor :json_text
 
   attribute :company_id, Integer,  presence: true
@@ -29,4 +30,10 @@ class Record
   validates :longitude, presence: true
   validates :latitude, presence: true
 
+
+  #NOTE for high load update index after bunch operations, not for each entity
+  after_save do
+    puts "Successfully saved: #{self}"
+    Elasticsearch::Persistence.client.indices.refresh index: 'records'
+  end
 end

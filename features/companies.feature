@@ -10,7 +10,7 @@ Feature: CreateCompany
     Then I should get a "201" response
 
 
-  Scenario: Creating a company with incorrect polygon
+  Scenario: Creating a company with incorrect data
     When I make "POST" request to "/companies.json":
     """
       {}
@@ -18,4 +18,4 @@ Feature: CreateCompany
     Then I should get a "422" response
     And there should be a JSON error response
     And the JSON errors should be:
-      | param is missing or the value is empty: company|
+      | Validation failed: Name can't be blank |

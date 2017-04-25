@@ -2,7 +2,7 @@ class DriversController < ActionController::Base
 
   def create
     begin
-      driver = Driver.create(driver_params)
+      driver = Driver.create!(driver_params)
       render json: driver.to_json, status: :created
     rescue Exception => e
       render json: { :errors => [e.message] }, status: 422

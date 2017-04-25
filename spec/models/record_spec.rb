@@ -4,8 +4,8 @@ RSpec.describe Record do
   subject { Record }
 
   it 'should raise validation exception when create with nil values' do
-    expect{
-      subject.create!
-    }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Driver can't be blank, Timestamp can't be blank, Latitude can't be blank, Longitude can't be blank")
+    record  = subject.create(speed: 123)
+    expect(record.valid?).to be_falsey
+    expect(record.errors.to_json).to eq("{\"company_id\":[\"can't be blank\"],\"longitude\":[\"can't be blank\"],\"latitude\":[\"can't be blank\"]}")
   end
 end

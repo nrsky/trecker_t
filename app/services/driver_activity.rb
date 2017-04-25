@@ -5,7 +5,7 @@
 # Repairing - The driver is repairing a machine on a field. This means that the speed is less than 1 km/h and the location is part of predefined fields (geofenced)
 
 require 'elasticsearch/persistence'
-class DriverActivityService
+class DriverActivity
 
   NO_DATA_PROVIDED_TIME = 30
   WORKS = [:driving, :cultivating, :repairing]
@@ -15,17 +15,15 @@ class DriverActivityService
     return if fields.empty?
 
     result = {}
+        # ActivityResult.new
     WORKS.each {|type| result[type] = {data: [], current_index: 0}}
 
-    #TODO move to configs
-    Geocoder.configure(:units => :km)
-
-    scope = create_scope(driver_id, day)
+    scope = Record.search(query: ElasticQuery.records_for(driver_id, day)).sort_by(&:timestamp)
     current_record = scope.first
     scope.each do |record|
-      time = get_time(record.timestamp, current_record.timestamp)
+      time = Trecker::Math.instance.get_time(record.timestamp, current_record.timestamp)
       if time < NO_DATA_PROVIDED_TIME && time != 0
-        speed = get_distance(record.longitude, record.latitude, current_record.longitude, current_record.latitude)/(time*3600)
+        speed = Trecker::Math.instance.get_distance(record.longitude, record.latitude, current_record.longitude, current_record.latitude)/(time*3600)
         if speed > 0
           work_on_predefined_fields = part_of_fields?(fields, record.longitude, record.latitude)
           update_activities!(result, speed, work_on_predefined_fields, time, current_record.timestamp)
@@ -33,7 +31,6 @@ class DriverActivityService
       else
         reset_counters(result)
       end
-
       current_record = record unless record == current_record
     end
 
@@ -41,35 +38,6 @@ class DriverActivityService
   end
 
   private
-
-  def create_scope(driver_id, day)
-    repository = Elasticsearch::Persistence::Repository.new
-
-    repository.search(query:
-                          {constant_score:
-                               {filter:
-                                    {bool:
-                                         {must:
-                                              [{term:
-                                                    {driver_id: driver_id}},
-                                               {range: {timestamp: {gte: "#{day}T00:00:00", lte: "#{day}T23:59:59"}}}
-                                              ]
-                                         }
-                                    }
-                               }
-                          }
-    ).sort_by(&:timestamp)
-  end
-
-  def get_distance(lon1, lat1, lon2, lat2)
-    Geocoder::Calculations.distance_between([lon1, lat1], [lon2, lat2])
-  end
-
-  def get_time(end_time, start_time)
-    result = (end_time - start_time)
-    result = result* 1.days if result.is_a?(Rational)
-    result
-  end
 
   def update_result_hash!(result, activity, time, timestamp)
     #TODO update to dynamic, ugly
@@ -95,10 +63,6 @@ class DriverActivityService
     WORKS.each { |type| result[type][:current_index] += 1 }
   end
 
-  def part_of_fields?(fields, longitude, latitude)
-    fields.any? { |field| field.contains?(geo_factory.point(longitude, latitude)) }
-  end
-
   def clean_result(result)
     result.each do |key, value|
       value.except!(:current_index)
@@ -113,9 +77,5 @@ class DriverActivityService
         data[:date_to] = (data[:date_from] + data[:total_time].seconds) if data[:date_from].present?
       end
     end
-  end
-
-  def geo_factory
-    RGeo::Geographic.spherical_factory
   end
 end

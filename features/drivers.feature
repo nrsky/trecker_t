@@ -18,4 +18,4 @@ Feature: CreateDriver
     Then I should get a "422" response
     And there should be a JSON error response
     And the JSON errors should be:
-      | param is missing or the value is empty: driver|
+      | Validation failed: Name can't be blank|

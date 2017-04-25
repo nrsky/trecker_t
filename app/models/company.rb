@@ -9,6 +9,5 @@ class Company < ApplicationRecord
   has_many :drivers
 
   validates :name, presence: true
-
-  #TODO add delete company should delete all drivers and RecordIndexes of this company
+  validates_uniqueness_of :name
 end

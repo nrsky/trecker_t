@@ -46,4 +46,4 @@ Feature: CreateRecord
     Then I should get a "422" response
     And there should be a JSON error response
     And the JSON errors should be:
-      | Validation failed: Longitude can't be blank|
+      | [:longitude, "can't be blank"]|

@@ -42,7 +42,7 @@ class RecordsController < ActionController::Base
   def processed_time_by_activities
     begin
       driver = Driver.find(params[:driver_id])
-      result = DriverActivityService.new.activities_for(driver.id, Date.today )
+      result = DriverActivity.new.activities_for(driver.id, Date.today )
       render json: result
     rescue Exception => e
       render json: { :errors => [e.message] }, status: 422

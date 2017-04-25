@@ -54,4 +54,16 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before :all do
+    Elasticsearch::Persistence.client.indices.create(index: 'records') unless Elasticsearch::Persistence.client.indices.exists? index: 'records'
+  end
+
+  config.after :all do
+    Elasticsearch::Persistence.client.indices.delete(index: 'records')
+  end
+
+  config.before(:each, elasticsearch: true) do
+    Elasticsearch::Persistence.client.indices.refresh index: 'records'
+  end
 end

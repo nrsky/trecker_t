@@ -23,7 +23,7 @@ Feature: CreateField
     Then I should get a "422" response
     And there should be a JSON error response
     And the JSON errors should be:
-      | Validation failed: Shape can't be blank|
+      | Validation failed: Shape cannot be empty or the data is not a polygon|
 
 
   Scenario: Creating a record without a name
