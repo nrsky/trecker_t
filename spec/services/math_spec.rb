@@ -1,4 +1,4 @@
-require './app/services/driver_activity'
+require './app/services/driver_activity_calculation'
 require 'rails_helper'
 
 @elasticsearch

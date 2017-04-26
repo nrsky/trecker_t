@@ -1,8 +1,7 @@
 class Activity
-  attr_accessor :name, :data, :current_index
+  attr_accessor :data, :current_index
 
-  def initialize(name)
-    self.name = name
+  def initialize
     self.data = []
     self.current_index = 0
   end

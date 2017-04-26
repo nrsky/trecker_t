@@ -5,7 +5,7 @@ class ActivityResult
 
   def initialize
     @result = {}
-    WORKS.each {|type| @result[type] =  Activity.new(type) }
+    WORKS.each {|type| @result[type] =  Activity.new }
   end
 
   def update_activities!(speed, part_of_fields, time, timestamp)
@@ -31,7 +31,7 @@ class ActivityResult
     WORKS.each { |type|  @result[type.to_sym].current_index += 1 }
   end
 
-  def update_date_to
+  def update_date_to!
     WORKS.each { |type|  @result[type.to_sym].add_date_to }
   end
 end

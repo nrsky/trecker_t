@@ -4,14 +4,12 @@
 # Cultivating - The driver is working on a field. This means that the speed is more than 1 km/h and the location is part of predefined fields (geofenced)
 # Repairing - The driver is repairing a machine on a field. This means that the speed is less than 1 km/h and the location is part of predefined fields (geofenced)
 
-require 'elasticsearch/persistence'
-class DriverActivity
+class DriverActivityCalculation
 
   NO_DATA_PROVIDED_TIME = 30
 
-  def activities_for(driver_id, day)
-    fields = Field.all.map(&:shape)
-    return if fields.empty?
+  def activities_for(driver_id, day, fields)
+
 
     result = ActivityResult.new
 
@@ -31,7 +29,7 @@ class DriverActivity
       current_record = record unless record == current_record
     end
 
-    result.update_date_to
-    print result.to_json
+    result.update_date_to!
+    result.to_json
   end
 end

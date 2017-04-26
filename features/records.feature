@@ -1,6 +1,8 @@
 Feature: CreateRecord
   Background:
     Given a driver with id 1
+    Given a field "field" with valid shape
+    Given records in elastic search with driver_id "1"
 
   Scenario: Creating a record with correct data
     When I make "POST" request to "/records.json":
@@ -47,3 +49,18 @@ Feature: CreateRecord
     And there should be a JSON error response
     And the JSON errors should be:
       | [:longitude, "can't be blank"]|
+
+  #TODO time changes dynamically, add step to verify date_from, date_to and time exists for the step
+  Scenario: Processed_time_by_activities
+    When I make a "GET" request to "/records/processed_time_by_activities?driver_id=1"
+    Then I should get a "200" response
+    And the response should contain the complex JSON:
+      """
+       {
+        "result":{
+        "driving": {"data":[]},
+        "cultivating": {"data":[]},
+        "repairing": {"data":[]}
+        }
+       }
+      """
