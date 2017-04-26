@@ -7,43 +7,7 @@
   <div>
 
     Upload data from file:
-
-    <div>(You can upload fields or driver records within json format). Example of file format
-      {"fields": [{"name":"Arnis",  "polygon":"75.15 29.53,77 29,77.6 29.5,75.15 29.53"}]} for fields</div>
-
-    <div>For records
-    {
-    "records": [
-    {
-    "company_id":123,
-    "driver_id":456,
-    "timestamp":"2017-04-10'T'22:46:00",
-    "latitude":52.234234,
-    "longitude":13.23324,
-    "accuracy":12.0,
-    "speed":123.45
-    },
-    {
-    "company_id":123,
-    "driver_id":456,
-    "timestamp":"2017-04-10'T'22:46:03",
-    "latitude":52.234236,
-    "longitude":13.23327,
-    "accuracy":12.0,
-    "speed":123.45
-    },
-    {
-    "company_id":123,
-    "driver_id":456,
-    "timestamp":"2017-04-10'T'22:46:06",
-    "latitude":52.234236,
-    "longitude":13.23328,
-    "accuracy":13.0,
-    "speed":123.45
-    }
-    ]
-    }
-    </div>
+    Please see fixtures in spec folder for the file format. Fields and Records can be uploaded
 
     <%= form_tag({:action => 'upload'}, multipart: true) do %>
       <div class="field">
