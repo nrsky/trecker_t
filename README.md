@@ -53,15 +53,17 @@ CREATE EXTENSION postgis_tiger_geocoder;
 
 rake db:migrate    
 
-6) #seed DB, can take up to few min, depending on hardware
-rake db:seed      #seeds for development only
+6) #seed DB, can take up to a min, depending on hardware
+rake db:seed      - creates index and some data with drivers, companies, etc. 10K records will be added to elastic search 
 
 8) bundle exec rspec   - for tests
 9) bundle exec cucumber  - for features
 
 10) rails s Puma       #start the service
   
-11) http://localhost:3000/record/processed_time_by_activities?driver_id=1&day=10/04/2017  #provide any existing driver_id - should be seeded in DB
+11) open http://localhost:3000 to upload/add drivers, fields, records from view or upload a file. 
+
+http://localhost:3000/record/processed_time_by_activities?driver_id=1&day=10/04/2017  #provide any existing driver_id - should be seeded in DB
 cucumber feature  must be added 
 example of response
 {"driving":{"data":[]},"cultivating":{"data":[]},"repairing":{"data":[{"date_from":"2017-04-10T01:28:44.419Z","total_time":27.721000000000004,"date_to":"2017-04-10T01:29:12.419+00:00"},{"date_from":"2017-04-10T01:30:04.112Z","total_time":12.238,"date_to":"2017-04-10T01:30:16.112+00:00"}]}}
@@ -69,6 +71,10 @@ example of response
 12) Assumptions 
   - Polygon format is  (75.15 29.53,77 29,77.6 29.5,75.15 29.53), it can be changed easy to another format(multipoligon for more points) in DB. Please check you add this format polygon and it is exists in geography. 
   - I assume in the app that driver doesn't work if information is not provided for 30 sec. 
+  
+13) -move driver_activity_calculations from the App, probably create async task with sidekiq. Driver of Fiels existence can be checked by API call to main app
+    -now there is only 1 index, play with indexes and research what ES can do with geopoints. 
+    -update index not after save entity, but after save request (can be done save list of entities)
   
 
      

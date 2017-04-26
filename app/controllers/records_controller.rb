@@ -41,11 +41,12 @@ class RecordsController < ActionController::Base
 
   def processed_time_by_activities
     begin
+      day = Date.strptime(params[:day], "%d/%m/%Y")
       driver = Driver.find(params[:driver_id])
       fields = Field.all.map(&:shape)
       raise Exception("Fields provided cannot be empty") if fields.empty?
 
-      result = DriverActivityCalculation.new.activities_for(driver.id, Date.today, fields)
+      result = DriverActivityCalculation.new.activities_for(driver.id, day, fields)
       render json: result
     rescue Exception => e
       render json: { :errors => [e.message] }, status: 422

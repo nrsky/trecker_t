@@ -52,7 +52,7 @@ Feature: CreateRecord
 
   #TODO time changes dynamically, add step to verify date_from, date_to and time exists for the step
   Scenario: Processed_time_by_activities
-    When I make a "GET" request to "/records/processed_time_by_activities?driver_id=1"
+    When I make a "GET" request to "/records/processed_time_by_activities?driver_id=1&day=26/04/2017"
     Then I should get a "200" response
     And the response should contain the complex JSON:
       """
