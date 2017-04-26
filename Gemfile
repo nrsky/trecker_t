@@ -29,9 +29,9 @@ gem 'activerecord-postgis-adapter', '~> 4.0'
 
 #elasticsearch
 gem 'elasticsearch-rails', git: 'git://github.com/elastic/elasticsearch-rails.git'
-gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
-
 gem "elasticsearch-persistence", require: 'elasticsearch/persistence/model'
+gem 'elasticsearch-extensions', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+
 
 gem 'geocoder'
 gem 'carrierwave'

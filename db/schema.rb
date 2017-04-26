@@ -374,6 +374,11 @@ ActiveRecord::Schema.define(version: 20170406230005) do
     t.text "staging_schema"
   end
 
+  create_table "mytable", force: :cascade do |t|
+    t.geometry "geom", limit: {:srid=>26910, :type=>"point"}
+    t.string   "name", limit: 128
+  end
+
   create_table "pagc_gaz", force: :cascade do |t|
     t.integer "seq"
     t.text    "word"

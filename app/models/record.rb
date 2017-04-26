@@ -13,8 +13,6 @@
 #accuracy field can be used to determine whether data precise or not and skip models with very low accuracy
 class Record
   include Elasticsearch::Persistence::Model
-  include Elasticsearch::Model::Callbacks
-
 
   attr_accessor :json_text
 
@@ -33,7 +31,7 @@ class Record
 
   #NOTE for high load update index after bunch operations, not for each entity
   after_save do
-    puts "Successfully saved: #{self}"
+    # puts "Successfully saved: #{self}"
     Elasticsearch::Persistence.client.indices.refresh index: 'records'
   end
 end
